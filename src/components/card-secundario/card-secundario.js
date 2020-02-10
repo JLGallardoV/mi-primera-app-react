@@ -5,11 +5,28 @@ import { Link } from 'react-router-dom' //sirve para enrutar nuestra aplicacion 
 
 export default class CardSecundario extends Component {
 
+  constructor(){
+    super();
+    //objeto para manipulacion del estado de los elementos del componente (debe llamarse como tal state si no no refleja cambios en el DOM)
+    this.state={
+      resumen:'',
+      descripcion:''
+    };
+    this.arregloDatos = [];
+  }
+
   //INICIO - METODOS PARA NUESTRO COMPONENTE
 
-  //funcion prueba 
-  contenidoTitulo = () => {
-    console.log("esto funciona!");
+  //funcion para transeferir los datos de los inputs a una lista
+  enviarDatos = () => {
+    this.arregloDatos.push(
+      {
+        id: this.arregloDatos.length,
+        resumen:this.state.resumen,
+        descripcion:this.state.descripcion
+      }
+    );
+    console.log("datos arreglo: ",this.arregloDatos);
   }
 
   //metodo invocado en el evento onChange de los inputs
@@ -18,12 +35,6 @@ export default class CardSecundario extends Component {
     this.setState({
       [e.target.name] : e.target.value //asignamos un cambio de estado (nvo valor) a tal elemento detectado en el onchange
     });
-  }
-
-  //objeto para manipulacion del estado de los elementos del componente (debe llamarse como tal state si no no refleja cambios en el DOM)
-  state = {
-    resumen:'',
-    descripcion:''
   }
 
   //FIN - METODOS PARA NUESTRO COMPONENTE
@@ -55,7 +66,7 @@ export default class CardSecundario extends Component {
                       <textarea name="descripcion" type="text" className="form-control" id="idInputDescripcion" onChange={this.detectarCambios} value={this.state.descripcion}/>
                     </div>
                   </form>
-                  <button type="button" className="btn btn-primary btn-block" style={{marginTop:'70px'}} onClick={this.contenidoTitulo}>Agregar</button>
+                  <button type="button" className="btn btn-primary btn-block" style={{marginTop:'70px'}} onClick={this.enviarDatos}>Agregar</button>
                 </div>
                 <div className="card-footer ">
                 </div>
@@ -66,6 +77,29 @@ export default class CardSecundario extends Component {
               <div className="card" style={{width:'100%'}}>
                 <div className="card-header text-muted" style={{textAlign:'center'}}>
                   Elementos
+                </div>
+                <div className="container">
+                  <table className="table" style={{marginTop: '12px'}}>
+                    <thead className="thead-dark">
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Resumen</th>
+                        <th scope="col">descripcion</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>EjemploR</td>
+                        <td>EjemploD</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>EjemploR</td>
+                        <td>EjemploD</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
                 <div className="card-body">
                 </div>
